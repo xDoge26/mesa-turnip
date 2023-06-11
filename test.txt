@@ -28,10 +28,10 @@ cp $(pwd)/build64/src/freedreno/vulkan/freedreno_icd.aarch64.json ~/Desktop
 cp $(pwd)/build32/src/freedreno/vulkan/freedreno_icd.armhf.json ~/Desktop
 
 # test turnip 
-TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw VK_ICD_FILENAMES=~/Desktop/freedreno_icd.aarch64.json vkcube 
+DISPLAY=:0 TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw VK_ICD_FILENAMES=~/Desktop/freedreno_icd.aarch64.json vkcube 
 
 # test zink 
-MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw VK_ICD_FILENAMES=~/Desktop/freedreno_icd.aarch64.json glxheads
+DISPLAY=:0 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw VK_ICD_FILENAMES=~/Desktop/freedreno_icd.aarch64.json glxgears
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
