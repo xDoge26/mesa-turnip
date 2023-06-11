@@ -2,10 +2,6 @@ sudo apt update && sudo apt upgrade && sudo apt build-dep mesa && sudo apt insta
 
 -----------------------------------------------------------------------------------------------------------------------------------
 
-apt update -y
-apt upgrade -y
-apt install -y wget git
-apt-get build-dep mesa -y 
 cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include
 
 wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/mesa-freedreno-feature-a610.tar.gz
