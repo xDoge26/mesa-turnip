@@ -5,7 +5,7 @@ sudo apt update && sudo apt upgrade && sudo apt build-dep mesa && sudo apt insta
 cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include
 
 wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/mesa-freedreno-feature-a610.tar.gz
-tar -xvf ./*.tar.gz
+tar -xf ./*.tar.gz
 cd mesa-freedreno-feature-a610
 meson build -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled --prefix /usr -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
 ninja -C build install
