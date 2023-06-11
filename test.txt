@@ -7,6 +7,7 @@ apt install libglvnd-dev:arm64 zlib1g-dev:arm64 libexpat1-dev:arm64 libdrm-dev:a
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include
+cp -r /usr/include/libdrm/* /usr/include/
 
 wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/mesa-freedreno-feature-a610.tar.gz
 tar -xf ./*.tar.gz
