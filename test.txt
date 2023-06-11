@@ -35,7 +35,7 @@ MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw VK_ICD_
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-nano cross.txt
+nano $(pwd)/cross.txt
 
 [binaries]
 c = 'arm-linux-gnueabihf-gcc'
