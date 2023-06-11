@@ -25,11 +25,6 @@ cd libdrm-2.4.115*
 meson -C build
 ninja -C build install
 
-# build wayland
-# see https://www.linuxfromscratch.org/blfs/view/svn/general/wayland.html for guide
-
-# build wayland-proto
-# see https://www.linuxfromscratch.org/blfs/view/svn/general/wayland-protocols.html for guide  
 # a610 turnip branch
 cd ~
 git clone --depth 1 https://gitlab.freedesktop.org/Danil/mesa.git
