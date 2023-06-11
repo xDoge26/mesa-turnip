@@ -1,0 +1,49 @@
+apt update -y
+apt upgrade -y
+apt install -y wget git
+apt-get build-dep mesa -y 
+cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include
+
+wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/mesa-freedreno-feature-a610.tar.gz
+tar -xvf ./*.tar.gz
+cd mesa-freedreno-feature-a610
+meson build -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled --prefix /usr -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
+ninja -C build install
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+sudo apt update
+sudo apt install -y software-properties-common dirmngr apt-transport-https wget git unzip libxcb-shm0 mesa-utils python3-pip software-properties-common dirmngr apt-transport-https python3-mako libxcb-shm0-dev libpciaccess-dev make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libxml2-dev graphviz doxygen xsltproc xmlto xutils-dev libxkbcommon-dev libvulkan1 mesa-vulkan-drivers vulkan-utils
+sudo apt-get build-dep mesa -y
+pip3 install meson ninja
+pip3 install dataclasses
+
+# build drm
+wget https://dri.freedesktop.org/libdrm/libdrm-2.4.115.tar.xz
+tar xf libdrm-2.4.115.tar.xz
+cd libdrm-2.4.115*
+meson -C build
+ninja -C build install
+
+# build wayland
+# see https://www.linuxfromscratch.org/blfs/view/svn/general/wayland.html for guide
+
+# build wayland-proto
+# see https://www.linuxfromscratch.org/blfs/view/svn/general/wayland-protocols.html for guide  
+# a610 turnip branch
+cd ~
+git clone --depth 1 https://gitlab.freedesktop.org/Danil/mesa.git
+cd mesa
+git fetch "https://gitlab.freedesktop.org/Danil/mesa.git" 'freedreno/feature/a610'
+git checkout -b 'mesa-freedreno/feature/a610' FETCH_HEAD
+
+meson build -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled --prefix /usr -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
+
+ninja -C build # this can randomly fail; rerun as much as needed until completion
+
+# warning !! donot run ninja -C build install !!
+# instead just copy over turnip driver
+cp $(pwd)/build/src/freedreno/vulkan/libvulkan_freedreno.so /usr/lib/aarch64-linux-gnu/
+
+# test turnip
+VK_ICD_FILENAMES=$(pwd)/build/src/freedreno/vulkan/freedreno_icd.aarch64.json vulkaninfo
