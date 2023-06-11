@@ -18,12 +18,6 @@ sudo apt-get build-dep mesa -y
 pip3 install meson ninja
 pip3 install dataclasses
 
-# build drm
-wget https://dri.freedesktop.org/libdrm/libdrm-2.4.115.tar.xz
-tar xf libdrm-2.4.115.tar.xz
-cd libdrm-2.4.115*
-meson -C build
-ninja -C build install
 
 # a610 turnip branch
 cd ~
