@@ -30,6 +30,8 @@ TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw VK_ICD_FILENAMES=$(pwd)/build/src/freedr
 MESA_LOADER_DRIVER_OVERRIDE=zink
 
 -----------------------------------------------------------------------------------------------------------------
+nano cross.txt
+
 [binaries]
 c = 'arm-linux-gnueabihf-gcc'
 cpp = 'arm-linux-gnueabihf-g++'
