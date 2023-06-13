@@ -51,7 +51,8 @@ system = 'linux'
 cpu_family = 'arm'
 cpu = 'armhf'
 endian = 'little'
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-libglvnd-dev:armhf libglvnd-dev:armhf libxext-dev:armhf 
+
 
