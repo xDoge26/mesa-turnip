@@ -54,8 +54,9 @@ cpu = 'armhf'
 endian = 'little'
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-meson build64 --libdir lib/aarch64-linux-gnu --prefix $HOME/mesa -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
+meson build64 --libdir aarch64-linux-gnu --prefix $HOME/mesa -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
 ninja -C build64/
 
-
+meson build32 --cross-file cross.txt --libdir arm-linux-gnueabihf --prefix $HOME/mesa -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
+ninja -C build32/
 
