@@ -9,7 +9,6 @@ apt install libgl1:arm64 libvulkan1:arm64 libglvnd-dev:arm64 zlib1g-dev:arm64 li
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include/
-
 wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/mesa-freedreno-feature-a610.tar.gz
 tar -xf ./*.tar.gz
 cd mesa-freedreno-feature-a610
