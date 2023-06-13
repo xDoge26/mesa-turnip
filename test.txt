@@ -14,12 +14,11 @@ wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/
 tar -xf ./*.tar.gz
 cd mesa-freedreno-feature-a610
 
+meson build64/ --libdir lib/aarch64-linux-gnu/ --prefix /usr -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
+meson compile -C build64/
 
-meson build64 --libdir=lib/aarch64-linux-gnu -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled --prefix /usr -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
-ninja -C build64/
-
-meson build32 --cross-file=cross.txt --libdir=lib/arm-linux-gnueabihf -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled --prefix /usr -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
-ninja -C build32/
+meson build32/ --cross-file cross.txt --libdir lib/arm-linux-gnueabihf/ --prefix /usr -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
+meson compile -C build32/
 
 # warning !! donot run ninja -C build install !!
 # instead just copy over turnip driver
@@ -54,9 +53,5 @@ cpu = 'armhf'
 endian = 'little'
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-meson build64/ --libdir lib/aarch64-linux-gnu/ --prefix /usr -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
-meson compile -C build64/
-
-meson build32/ --cross-file cross.txt --libdir lib/arm-linux-gnueabihf/ --prefix /usr -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -Dbuildtype=release
-meson compile -C build32/
+libglvnd-dev:armhf libglvnd-dev:armhf libxext-dev:armhf 
 
