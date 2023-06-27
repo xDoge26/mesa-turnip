@@ -46,10 +46,10 @@ cp $(pwd)/build64/src/freedreno/vulkan/freedreno_icd.aarch64.json /usr/share/vul
 cp $(pwd)/build32/src/freedreno/vulkan/freedreno_icd.armv7l.json /usr/share/vulkan/icd.d/
 
 # test turnip 
-DISPLAY=:0 TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw vkcube 
+DISPLAY=:1 TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw vkcube 
 
 # test zink 
-DISPLAY=:0 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw glxgears
+DISPLAY=:1 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw glxgears
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
