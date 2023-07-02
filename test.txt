@@ -29,10 +29,10 @@ wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/
 tar -xf ./*.tar.gz
 cd mesa-freedreno-feature-a610
 
-meson build64/ --prefix /usr --libdir ./lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -D buildtype=release
+meson build64/ --prefix /usr --libdir ./lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D shared-glapi=enabled -D gles1=disabled -D libunwind=disabled -D osmesa=true -D microsoft-clc=disabled -D valgrind=disabled -D buildtype=release
 meson compile -C build64/
 
-meson build32/ --cross-file cross.txt --prefix /usr --libdir ./lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D libunwind=disabled -D osmesa=true -D shared-glapi=enabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled -D freedreno-kmds=kgsl -D buildtype=release
+meson build32/ --cross-file cross.txt --prefix /usr --libdir ./lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D shared-glapi=enabled -D gles1=disabled -D libunwind=disabled -D osmesa=true -D microsoft-clc=disabled -D valgrind=disabled -D buildtype=release
 meson compile -C build32/
 
 # this can randomly fail, rerun as much as needed until completion
