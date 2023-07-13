@@ -53,8 +53,7 @@ DISPLAY=:1 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-nano $(pwd)/cross.txt
-
+echo "\
 [binaries]
 c = 'arm-linux-gnueabihf-gcc'
 cpp = 'arm-linux-gnueabihf-g++'
@@ -67,6 +66,7 @@ system = 'linux'
 cpu_family = 'arm'
 cpu = 'armv7l'
 endian = 'little'
+" > ./cross.txt
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
