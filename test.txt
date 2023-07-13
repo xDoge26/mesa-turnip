@@ -19,8 +19,8 @@ sudo apt update
 sudo apt upgrade
 sudo apt build-dep mesa 
 apt install make cmake git wget vulkan-tools mesa-utils g++-arm-linux-gnueabihf g++-aarch64-linux-gnu
-apt install libglvnd-dev:armhf zlib1g-dev:armhf libexpat1-dev:armhf libdrm-dev:armhf libx11-dev:armhf libx11-xcb-dev:armhf libxext-dev:armhf libxdamage-dev:armhf libxcb-glx0-dev:armhf libxcb-dri2-0-dev:armhf libxcb-dri3-dev:armhf libxcb-shm0-dev:armhf libxcb-present-dev:armhf libxshmfence-dev:armhf libxxf86vm-dev:armhf libxrandr-dev:armhf libwayland-dev:armhf wayland-protocols:armhf libwayland-egl-backend-dev:armhf 
-apt install libglvnd-dev:arm64 zlib1g-dev:arm64 libexpat1-dev:arm64 libdrm-dev:arm64 libx11-dev:arm64 libx11-xcb-dev:arm64 libxext-dev:arm64 libxdamage-dev:arm64 libxcb-glx0-dev:arm64 libxcb-dri2-0-dev:arm64 libxcb-dri3-dev:arm64 libxcb-shm0-dev:arm64 libxcb-present-dev:arm64 libxshmfence-dev:arm64 libxxf86vm-dev:arm64 libxrandr-dev:arm64 libwayland-dev:arm64 wayland-protocols:arm64 libwayland-egl-backend-dev:arm64  
+apt install zlib1g-dev:armhf libexpat1-dev:armhf libdrm-dev:armhf libx11-dev:armhf libx11-xcb-dev:armhf libxext-dev:armhf libxdamage-dev:armhf libxcb-glx0-dev:armhf libxcb-dri2-0-dev:armhf libxcb-dri3-dev:armhf libxcb-shm0-dev:armhf libxcb-present-dev:armhf libxshmfence-dev:armhf libxxf86vm-dev:armhf libxrandr-dev:armhf libwayland-dev:armhf wayland-protocols:armhf libwayland-egl-backend-dev:armhf 
+apt install zlib1g-dev:arm64 libexpat1-dev:arm64 libdrm-dev:arm64 libx11-dev:arm64 libx11-xcb-dev:arm64 libxext-dev:arm64 libxdamage-dev:arm64 libxcb-glx0-dev:arm64 libxcb-dri2-0-dev:arm64 libxcb-dri3-dev:arm64 libxcb-shm0-dev:arm64 libxcb-present-dev:arm64 libxshmfence-dev:arm64 libxxf86vm-dev:arm64 libxrandr-dev:arm64 libwayland-dev:arm64 wayland-protocols:arm64 libwayland-egl-backend-dev:arm64  
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -29,10 +29,10 @@ wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/
 tar -xf ./*.tar.gz
 cd mesa-freedreno-feature-a610
 
-meson build64/ --prefix /usr --libdir ./lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D shared-glapi=enabled -D gles1=disabled -D libunwind=disabled -D osmesa=true -D microsoft-clc=disabled -D valgrind=disabled -D buildtype=release
+meson build64/ --prefix /usr --libdir ./lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
 meson compile -C build64/
 
-meson build32/ --cross-file cross.txt --prefix /usr --libdir ./lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D shared-glapi=enabled -D gles1=disabled -D libunwind=disabled -D osmesa=true -D microsoft-clc=disabled -D valgrind=disabled -D buildtype=release
+meson build32/ --cross-file cross.txt --prefix /usr --libdir ./lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
 meson compile -C build32/
 
 # this can randomly fail, rerun as much as needed until completion
