@@ -51,30 +51,5 @@ DISPLAY=:1 TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw vkcube
 # test zink 
 DISPLAY=:1 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw glxgears
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-echo "\
-[binaries]
-c = 'arm-linux-gnueabihf-gcc'
-cpp = 'arm-linux-gnueabihf-g++'
-ar = 'arm-linux-gnueabihf-ar'
-strip = 'arm-linux-gnueabihf-strip'
-pkgconfig = 'arm-linux-gnueabihf-pkg-config'
 
-[host_machine]
-system = 'linux'
-cpu_family = 'arm'
-cpu = 'armv7l'
-endian = 'little'
-" > ./cross.txt
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-nano turnip.sh
-
-#!/bin/bash
-
-MESA=$HOME/mesa \
-LD_LIBRARY_PATH=$MESA/lib/aarch64-linux-gnu/:$MESA/lib/arm-linux-gnueabihf/:$LD_LIBRARY_PATH \
-VK_ICD_FILENAMES=$MESA/share/vulkan/icd.d/freedreno_icd.aarch64.json:$MESA/share/vulkan/icd.d/freedreno_icd.armv7l.json \
-exec "$@"
