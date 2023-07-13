@@ -61,4 +61,7 @@ Description: Mesa Vulkan graphics drivers
  includes Vulkan drivers provided by the Mesa project.
 " > ${MESA_64}/DEBIAN/control
 
+cp ${MESA_PREFIX}/build64/src/freedreno/vulkan/libvulkan_freedreno.so ${MESA_64}/usr/lib/aarch64-linux-gnu/
+cp ${MESA_PREFIX}/build64/src/freedreno/vulkan/freedreno_icd.aarch64.json ${MESA_64}/usr/share/vulkan/icd.d/
+
 dpkg-deb --build --root-owner-group ${MESA_PKG}
