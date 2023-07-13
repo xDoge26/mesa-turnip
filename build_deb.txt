@@ -3,7 +3,7 @@ cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include/
 wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/mesa-freedreno-feature-a610.tar.gz
 tar -xf ./*.tar.gz
 
-MESA_PREFIX=$(pwd)/mesa-freedreno-feature-a610
+MESA_PREFIX=~/mesa-freedreno-feature-a610
 MESA_VER=$(cat $MESA_PREFIX/VERSION)
 DATE=$(date +"%F" | sed 's/-//g')
 
