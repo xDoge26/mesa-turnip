@@ -4,4 +4,29 @@ mkdir -p ${MESA_PREFIX}/usr/share/vulkan/icd.d/
 mkdir ${MESA_PREFIX}/DEBIAN
 touch ${MESA_PREFIX}/DEBIAN/control
 
+Package: mesa-vulkan-drivers
+Source: mesa
+Version: ${MESA_VER}
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Installed-Size: 23071
+Depends: libvulkan1, python3:any | python3-minimal:any, libc6, libdrm-amdgpu1, libdrm2, libelf1, libexpat1, libgcc-s1, libstdc++6, libwayland-client0, libx11-xcb1, libxcb-dri3-0, libxcb-present0, libxcb-randr0, libxcb-shm0, libxcb-sync1, libxcb-xfixes0, libxcb1, libxshmfence1, libzstd1, zlib1g
+Provides: vulkan-icd
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://mesa3d.org/
+Description: Mesa Vulkan graphics drivers
+ Vulkan is a low-overhead 3D graphics and compute API. This package
+ includes Vulkan drivers provided by the Mesa project.
+
+
+
+
+
+
+
+
+
 dpkg-deb --build --root-owner-group <package-dir>
