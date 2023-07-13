@@ -1,1 +1,7 @@
 mesa-vulkan-kgsl_${MESA_VER}-${COMMIT}-${DATE}_arm64
+mkdir -p ${MESA_PREFIX}/usr/lib/aarch64-linux-gnu/
+mkdir -p ${MESA_PREFIX}/usr/share/vulkan/icd.d/
+mkdir ${MESA_PREFIX}/DEBIAN
+touch ${MESA_PREFIX}/DEBIAN/control
+
+dpkg-deb --build --root-owner-group <package-dir>
