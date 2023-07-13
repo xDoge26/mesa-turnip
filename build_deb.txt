@@ -30,12 +30,4 @@ Description: Mesa Vulkan graphics drivers
  Vulkan is a low-overhead 3D graphics and compute API. This package
  includes Vulkan drivers provided by the Mesa project.
 
-
-
-
-
-
-
-
-
-dpkg-deb --build --root-owner-group <package-dir>
+dpkg-deb --build --root-owner-group <${MESA_PKG}>
