@@ -1,3 +1,4 @@
+# Prepare
 cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include/
 wget https://gitlab.freedesktop.org/Danil/mesa/-/archive/freedreno/feature/a610/mesa-freedreno-feature-a610.tar.gz
 tar -xf ./*.tar.gz
@@ -5,13 +6,42 @@ tar -xf ./*.tar.gz
 MESA_PREFIX=$(pwd)/mesa-freedreno-feature-a610
 MESA_VER=$(cat $MESA_PREFIX/VERSION)
 DATE=$(date +"%F" | sed 's/-//g')
-MESA_PKG=mesa-vulkan-kgsl_${MESA_VER}-${DATE}_arm64
 
-mkdir -p ${MESA_PKG}/usr/lib/aarch64-linux-gnu/
-mkdir -p ${MESA_PKG}/usr/share/vulkan/icd.d/
-mkdir ${MESA_PKG}/DEBIAN
-touch ${MESA_PKG}/DEBIAN/control
+# Cross compile
 
+echo "\
+[binaries]
+c = 'arm-linux-gnueabihf-gcc'
+cpp = 'arm-linux-gnueabihf-g++'
+ar = 'arm-linux-gnueabihf-ar'
+strip = 'arm-linux-gnueabihf-strip'
+pkgconfig = 'arm-linux-gnueabihf-pkg-config'
+
+[host_machine]
+system = 'linux'
+cpu_family = 'arm'
+cpu = 'armv7l'
+endian = 'little'
+" > ${MESA_PREFIX}/cross.txt
+
+# Build mesa 
+cd ${MESA_PREFIX}
+
+meson build64/ --prefix /usr --libdir ./lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
+meson compile -C build64/
+
+meson build32/ --cross-file cross.txt --prefix /usr --libdir ./lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
+meson compile -C build32/
+
+# Build deb64
+cd $HOME
+MESA_64=~/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_arm64
+
+mkdir -p ${MESA_64}/usr/lib/aarch64-linux-gnu/
+mkdir -p ${MESA_64}/usr/share/vulkan/icd.d/
+mkdir ${MESA_64}/DEBIAN
+
+echo "\
 Package: mesa-vulkan-kgsl
 Source: mesa
 Version: ${MESA_VER}
@@ -29,5 +59,6 @@ Homepage: https://mesa3d.org/
 Description: Mesa Vulkan graphics drivers
  Vulkan is a low-overhead 3D graphics and compute API. This package
  includes Vulkan drivers provided by the Mesa project.
+" > ${MESA_64}/DEBIAN/control
 
-dpkg-deb --build --root-owner-group <${MESA_PKG}>
+dpkg-deb --build --root-owner-group ${MESA_PKG}
