@@ -11,7 +11,7 @@ mkdir -p ${MESA_PKG}/usr/share/vulkan/icd.d/
 mkdir ${MESA_PKG}/DEBIAN
 touch ${MESA_PKG}/DEBIAN/control
 
-Package: mesa-vulkan-drivers
+Package: mesa-vulkan-kgsl
 Source: mesa
 Version: ${MESA_VER}
 Architecture: arm64
