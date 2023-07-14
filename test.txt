@@ -27,7 +27,7 @@ apt install zlib1g-dev:arm64 libexpat1-dev:arm64 libdrm-dev:arm64 libx11-dev:arm
 cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include/
 wget https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz
 tar -xf ./*.tar.gz
-cd mesa-freedreno-feature-a610
+cd mesa-main
 
 meson build64/ --prefix /usr --libdir ./lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
 meson compile -C build64/
