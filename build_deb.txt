@@ -1,3 +1,9 @@
+# test turnip 
+DISPLAY=:1 TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw vkcube 
+
+# test zink 
+DISPLAY=:1 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw glxgears
+
 # Prepare
 
 echo "
