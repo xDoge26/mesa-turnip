@@ -28,6 +28,8 @@ cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include/
 wget https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz
 tar -xf ./*.tar.gz
 
+# Set env var
+
 MESA_PREFIX=~/mesa-main
 MESA_VER=$(cat $MESA_PREFIX/VERSION)
 DATE=$(date +"%F" | sed 's/-//g')
