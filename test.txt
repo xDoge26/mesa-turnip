@@ -42,14 +42,14 @@ system = 'linux'
 cpu_family = 'arm'
 cpu = 'armv7l'
 endian = 'little'
-" > ./cross.txt
+" > ./32.txt
 
 
 
 meson build64/ --prefix /usr --libdir ./lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D shared-glapi=enabled -D gles1=disabled -D libunwind=disabled -D osmesa=true -D microsoft-clc=disabled -D valgrind=disabled -D buildtype=release
 meson compile -C build64/
 
-meson build32/ --cross-file cross.txt --prefix /usr --libdir ./lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D shared-glapi=enabled -D gles1=disabled -D libunwind=disabled -D osmesa=true -D microsoft-clc=disabled -D valgrind=disabled -D buildtype=release
+meson build32/ --cross-file 32.txt --prefix /usr --libdir ./lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=swrast,virgl,zink,freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D egl=enabled -D gles2=enabled -D glvnd=true -D glx=dri -D shared-glapi=enabled -D gles1=disabled -D libunwind=disabled -D osmesa=true -D microsoft-clc=disabled -D valgrind=disabled -D buildtype=release
 meson compile -C build32/
 
 # this can randomly fail, rerun as much as needed until completion
@@ -67,6 +67,8 @@ DISPLAY=:1 TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw vkcube
 
 # test zink 
 DISPLAY=:1 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw glxgears
+
+
 
 
 
