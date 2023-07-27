@@ -55,15 +55,15 @@ system = 'linux'
 cpu_family = 'arm'
 cpu = 'armv7l'
 endian = 'little'
-" > ${MESA_PREFIX}/32.txt
+" > ${MESA_PREFIX}/arm.txt
 
 # Build mesa 
 cd ${MESA_PREFIX}
 
-meson build64/ --prefix /usr --libdir ./lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
+meson build64/ --prefix /usr --libdir lib/aarch64-linux-gnu/ -D platforms=x11,wayland -D gallium-drivers=freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
 meson compile -C build64/
 
-meson build32/ --cross-file 32.txt --prefix /usr --libdir ./lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
+meson build32/ --cross-file arm.txt --prefix /usr --libdir lib/arm-linux-gnueabihf/ -D platforms=x11,wayland -D gallium-drivers=freedreno -D vulkan-drivers=freedreno -D freedreno-kmds=kgsl -D dri3=enabled -D buildtype=release
 meson compile -C build32/
 
 # Build deb64
