@@ -1,8 +1,4 @@
-# test turnip 
-DISPLAY=:1 TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw vkcube 
-
-# test zink 
-DISPLAY=:1 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform MESA_VK_WSI_DEBUG=sw glxgears
+#!/bin/bash
 
 # Prepare
 
@@ -71,7 +67,7 @@ meson build32/ --cross-file arm.txt --prefix /usr --libdir lib/arm-linux-gnueabi
 meson compile -C build32/
 
 # Build deb64
-cd $HOME
+cd ${HOME}
 
 mkdir -p ${MESA_64}/usr/lib/aarch64-linux-gnu/
 mkdir -p ${MESA_64}/usr/share/vulkan/icd.d/
@@ -103,7 +99,7 @@ dpkg-deb --build --root-owner-group ${MESA_64}
 
 
 # Build deb32
-cd $HOME
+cd ${HOME}
 
 mkdir -p ${MESA_32}/usr/lib/arm-linux-gnueabihf/
 mkdir -p ${MESA_32}/usr/share/vulkan/icd.d/
