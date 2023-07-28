@@ -33,12 +33,16 @@ cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include/
 
 wget https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz
 tar -xf ./*.tar.gz
+rm -rf ./*tar.gz
 
 # Set env var
 
 MESA_PREFIX=~/mesa-main
 MESA_VER=$(cat $MESA_PREFIX/VERSION)
 DATE=$(date +"%F" | sed 's/-//g')
+
+MESA_64=~/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_arm64
+MESA_32=~/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_armhf
 
 # Cross compile
 
@@ -68,7 +72,6 @@ meson compile -C build32/
 
 # Build deb64
 cd $HOME
-MESA_64=~/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_arm64
 
 mkdir -p ${MESA_64}/usr/lib/aarch64-linux-gnu/
 mkdir -p ${MESA_64}/usr/share/vulkan/icd.d/
@@ -101,7 +104,6 @@ dpkg-deb --build --root-owner-group ${MESA_64}
 
 # Build deb32
 cd $HOME
-MESA_32=~/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_armhf
 
 mkdir -p ${MESA_32}/usr/lib/arm-linux-gnueabihf/
 mkdir -p ${MESA_32}/usr/share/vulkan/icd.d/
