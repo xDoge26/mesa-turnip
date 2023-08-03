@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Prepare
+# Preparing
 
 echo "
 deb http://ports.ubuntu.com/ubuntu-ports jammy main restricted universe multiverse
@@ -25,20 +25,19 @@ apt install zlib1g-dev:armhf libexpat1-dev:armhf libdrm-dev:armhf libx11-dev:arm
 apt install zlib1g-dev:arm64 libexpat1-dev:arm64 libdrm-dev:arm64 libx11-dev:arm64 libx11-xcb-dev:arm64 libxext-dev:arm64 libxdamage-dev:arm64 libxcb-glx0-dev:arm64 libxcb-dri2-0-dev:arm64 libxcb-dri3-dev:arm64 libxcb-shm0-dev:arm64 libxcb-present-dev:arm64 libxshmfence-dev:arm64 libxxf86vm-dev:arm64 libxrandr-dev:arm64 libwayland-dev:arm64 wayland-protocols:arm64 libwayland-egl-backend-dev:arm64  
 cp /usr/include/libdrm/drm.h /usr/include/libdrm/drm_mode.h /usr/include/
 
+# Set env var
+BUILD_PREFIX="~/Desktop"
+MESA_PREFIX="${BUILD_PREFIX}/mesa-main"
+MESA_VER="$(cat ${MESA_PREFIX}/VERSION)"
+DATE="$(date +"%F" | sed 's/-//g')"
+
+MESA_64="${BUILD_PREFIX}/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_arm64"
+MESA_32="${BUILD_PREFIX}/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_armhf"
+
 # Download mesa
 
 wget https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz
 tar -xf ./*.tar.gz
-rm -rf ./*tar.gz
-
-# Set env var
-
-MESA_PREFIX=~/mesa-main
-MESA_VER=$(cat $MESA_PREFIX/VERSION)
-DATE=$(date +"%F" | sed 's/-//g')
-
-MESA_64=~/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_arm64
-MESA_32=~/mesa-vulkan-kgsl_${MESA_VER}-${DATE}_armhf
 
 # Cross compile
 
