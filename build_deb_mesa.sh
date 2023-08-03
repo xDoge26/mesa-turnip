@@ -79,7 +79,6 @@ rm ${MESA_64}/DEBIAN/md5sums ${MESA_64}/DEBIAN/triggers
 rm -rf ${MESA_64}/usr/share/drirc.d
 dpkg-deb --build --root-owner-group ${MESA_64}
 
-
 # Build deb32
 cd ${BUILD_PREFIX}
 apt download mesa-vulkan-drivers:armhf
@@ -90,3 +89,5 @@ rm ${MESA_32}/DEBIAN/md5sums ${MESA_32}/DEBIAN/triggers
 rm -rf ${MESA_32}/usr/share/drirc.d
 dpkg-deb --build --root-owner-group ${MESA_32}
 
+# Cleaning up
+rm -rf ${BUILD_PREFIX}/mesa-main*
