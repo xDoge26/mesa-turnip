@@ -69,9 +69,14 @@ meson compile -C build32/
 meson install -C build32/ --destdir ${MESA_32}
 
 # Build deb64
-cd ${HOME}
+cd ${BUILD_PREFIX}
 
+
+apt download mesa-vulkan-drivers:arm64
+dpkg -e mesa-vulkan-drivers_*_arm64.deb $MESA_64/DEBIAN/
+rm ${MESA_64}/DEBIAN/md5sums ${MESA_64}/DEBIAN/triggers
 rm -rf ${MESA_64}/usr/share/drirc.d
+
 mkdir ${MESA_64}/DEBIAN
 
 echo "\
