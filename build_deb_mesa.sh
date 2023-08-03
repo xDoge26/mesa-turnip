@@ -71,8 +71,7 @@ meson install -C build32/ --destdir ${MESA_32}
 # Build deb64
 cd ${HOME}
 
-mkdir -p ${MESA_64}/usr/lib/aarch64-linux-gnu/
-mkdir -p ${MESA_64}/usr/share/vulkan/icd.d/
+rm -rf ${MESA_64}/usr/share/drirc.d
 mkdir ${MESA_64}/DEBIAN
 
 echo "\
