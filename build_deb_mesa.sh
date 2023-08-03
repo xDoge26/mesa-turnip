@@ -74,8 +74,14 @@ cd ${BUILD_PREFIX}
 
 apt download mesa-vulkan-drivers:arm64
 dpkg -e mesa-vulkan-drivers_*_arm64.deb $MESA_64/DEBIAN/
+sed -ie "3s/.*/Version: ${MESA_VER}/g" $MESA_64/DEBIAN/control
+rm mesa-vulkan-drivers_*_arm64.deb
 rm ${MESA_64}/DEBIAN/md5sums ${MESA_64}/DEBIAN/triggers
 rm -rf ${MESA_64}/usr/share/drirc.d
+
+dpkg-deb --build --root-owner-group ${MESA_64}
+
+
 
 mkdir ${MESA_64}/DEBIAN
 
@@ -102,7 +108,6 @@ Description: Mesa Vulkan graphics drivers
 cp ${MESA_PREFIX}/build64/src/freedreno/vulkan/libvulkan_freedreno.so ${MESA_64}/usr/lib/aarch64-linux-gnu/
 cp ${MESA_PREFIX}/build64/src/freedreno/vulkan/freedreno_icd.aarch64.json ${MESA_64}/usr/share/vulkan/icd.d/
 
-dpkg-deb --build --root-owner-group ${MESA_64}
 
 
 # Build deb32
