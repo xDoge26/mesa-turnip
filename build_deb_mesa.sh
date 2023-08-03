@@ -72,7 +72,7 @@ meson install -C build32/ --destdir ${MESA_32}
 cd ${BUILD_PREFIX}
 
 apt download mesa-vulkan-drivers:arm64
-dpkg -e mesa-vulkan-drivers_*_arm64.deb ${MESA_64}/DEBIAN/
+dpkg-deb -e mesa-vulkan-drivers_*_arm64.deb ${MESA_64}/DEBIAN/
 sed -ie "3s/.*/Version: ${MESA_VER}/g" ${MESA_64}/DEBIAN/control
 rm mesa-vulkan-drivers_*_arm64.deb
 rm ${MESA_64}/DEBIAN/md5sums ${MESA_64}/DEBIAN/triggers
@@ -83,7 +83,7 @@ dpkg-deb --build --root-owner-group ${MESA_64}
 # Build deb32
 cd ${BUILD_PREFIX}
 apt download mesa-vulkan-drivers:armhf
-dpkg -e mesa-vulkan-drivers_*_armhf.deb ${MESA_32}/DEBIAN/
+dpkg-deb -e mesa-vulkan-drivers_*_armhf.deb ${MESA_32}/DEBIAN/
 sed -ie "3s/.*/Version: ${MESA_VER}/g" ${MESA_32}/DEBIAN/control
 rm mesa-vulkan-drivers_*_armhf.deb
 rm ${MESA_32}/DEBIAN/md5sums ${MESA_32}/DEBIAN/triggers
