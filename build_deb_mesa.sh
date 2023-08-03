@@ -82,6 +82,7 @@ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
 Depends: libvulkan1, python3:any | python3-minimal:any, libc6, libdrm-amdgpu1, libdrm2, libelf1, libexpat1, libgcc-s1, libstdc++6, libwayland-client0, libx11-xcb1, libxcb-dri3-0, libxcb-present0, libxcb-randr0, libxcb-shm0, libxcb-sync1, libxcb-xfixes0, libxcb1, libxshmfence1, libzstd1, zlib1g
 Replaces: mesa-vulkan-drivers 
+Breaks: mesa-vulkan-drivers
 Provides: vulkan-icd
 Section: libs
 Priority: optional
@@ -114,6 +115,7 @@ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
 Depends: libvulkan1, python3:any | python3-minimal:any, libc6, libdrm-amdgpu1, libdrm2, libelf1, libexpat1, libgcc-s1, libstdc++6, libwayland-client0, libx11-xcb1, libxcb-dri3-0, libxcb-present0, libxcb-randr0, libxcb-shm0, libxcb-sync1, libxcb-xfixes0, libxcb1, libxshmfence1, libzstd1, zlib1g
 Replaces: mesa-vulkan-drivers
+Breaks: mesa-vulkan-drivers
 Provides: vulkan-icd
 Section: libs
 Priority: optional
