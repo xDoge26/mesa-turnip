@@ -71,73 +71,22 @@ meson install -C build32/ --destdir ${MESA_32}
 # Build deb64
 cd ${BUILD_PREFIX}
 
-
 apt download mesa-vulkan-drivers:arm64
-dpkg -e mesa-vulkan-drivers_*_arm64.deb $MESA_64/DEBIAN/
-sed -ie "3s/.*/Version: ${MESA_VER}/g" $MESA_64/DEBIAN/control
+dpkg -e mesa-vulkan-drivers_*_arm64.deb ${MESA_64}/DEBIAN/
+sed -ie "3s/.*/Version: ${MESA_VER}/g" ${MESA_64}/DEBIAN/control
 rm mesa-vulkan-drivers_*_arm64.deb
 rm ${MESA_64}/DEBIAN/md5sums ${MESA_64}/DEBIAN/triggers
 rm -rf ${MESA_64}/usr/share/drirc.d
-
 dpkg-deb --build --root-owner-group ${MESA_64}
 
 
-
-mkdir ${MESA_64}/DEBIAN
-
-echo "\
-Package: mesa-vulkan-kgsl
-Source: mesa
-Version: ${MESA_VER}
-Architecture: arm64
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
-Depends: libvulkan1, python3:any | python3-minimal:any, libc6, libdrm-amdgpu1, libdrm2, libelf1, libexpat1, libgcc-s1, libstdc++6, libwayland-client0, libx11-xcb1, libxcb-dri3-0, libxcb-present0, libxcb-randr0, libxcb-shm0, libxcb-sync1, libxcb-xfixes0, libxcb1, libxshmfence1, libzstd1, zlib1g
-Replaces: mesa-vulkan-drivers 
-Breaks: mesa-vulkan-drivers
-Provides: vulkan-icd
-Section: libs
-Priority: optional
-Multi-Arch: same
-Homepage: https://mesa3d.org/
-Description: Mesa Vulkan graphics drivers
- Vulkan is a low-overhead 3D graphics and compute API. This package
- includes Vulkan drivers provided by the Mesa project.
-" > ${MESA_64}/DEBIAN/control
-
-cp ${MESA_PREFIX}/build64/src/freedreno/vulkan/libvulkan_freedreno.so ${MESA_64}/usr/lib/aarch64-linux-gnu/
-cp ${MESA_PREFIX}/build64/src/freedreno/vulkan/freedreno_icd.aarch64.json ${MESA_64}/usr/share/vulkan/icd.d/
-
-
-
 # Build deb32
-cd ${HOME}
-
-mkdir -p ${MESA_32}/usr/lib/arm-linux-gnueabihf/
-mkdir -p ${MESA_32}/usr/share/vulkan/icd.d/
-mkdir ${MESA_32}/DEBIAN
-
-echo "\
-Package: mesa-vulkan-kgsl
-Source: mesa
-Version: ${MESA_VER}
-Architecture: armhf
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
-Depends: libvulkan1, python3:any | python3-minimal:any, libc6, libdrm-amdgpu1, libdrm2, libelf1, libexpat1, libgcc-s1, libstdc++6, libwayland-client0, libx11-xcb1, libxcb-dri3-0, libxcb-present0, libxcb-randr0, libxcb-shm0, libxcb-sync1, libxcb-xfixes0, libxcb1, libxshmfence1, libzstd1, zlib1g
-Replaces: mesa-vulkan-drivers
-Breaks: mesa-vulkan-drivers
-Provides: vulkan-icd
-Section: libs
-Priority: optional
-Multi-Arch: same
-Homepage: https://mesa3d.org/
-Description: Mesa Vulkan graphics drivers
- Vulkan is a low-overhead 3D graphics and compute API. This package
- includes Vulkan drivers provided by the Mesa project.
-" > ${MESA_32}/DEBIAN/control
-
-cp ${MESA_PREFIX}/build32/src/freedreno/vulkan/libvulkan_freedreno.so ${MESA_32}/usr/lib/arm-linux-gnueabihf/
-cp ${MESA_PREFIX}/build32/src/freedreno/vulkan/freedreno_icd.armv7l.json ${MESA_32}/usr/share/vulkan/icd.d/
-
+cd ${BUILD_PREFIX}
+apt download mesa-vulkan-drivers:armhf
+dpkg -e mesa-vulkan-drivers_*_armhf.deb ${MESA_32}/DEBIAN/
+sed -ie "3s/.*/Version: ${MESA_VER}/g" ${MESA_32}/DEBIAN/control
+rm mesa-vulkan-drivers_*_armhf.deb
+rm ${MESA_32}/DEBIAN/md5sums ${MESA_32}/DEBIAN/triggers
+rm -rf ${MESA_32}/usr/share/drirc.d
 dpkg-deb --build --root-owner-group ${MESA_32}
+
