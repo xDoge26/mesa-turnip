@@ -73,7 +73,7 @@ cd ${BUILD_PREFIX}
 
 apt download mesa-vulkan-drivers:arm64
 dpkg-deb -e mesa-vulkan-drivers_*_arm64.deb ${MESA_64}/DEBIAN/
-sed -ie "3s/.*/Version: ${MESA_VER}/g" ${MESA_64}/DEBIAN/control
+sed -ie "3s/.*/Version: ${MESA_VER}-${DATE}/g" ${MESA_64}/DEBIAN/control
 rm mesa-vulkan-drivers_*_arm64.deb
 rm ${MESA_64}/DEBIAN/md5sums ${MESA_64}/DEBIAN/triggers
 rm -rf ${MESA_64}/usr/share/drirc.d
@@ -84,7 +84,7 @@ cd ${BUILD_PREFIX}
 
 apt download mesa-vulkan-drivers:armhf
 dpkg-deb -e mesa-vulkan-drivers_*_armhf.deb ${MESA_32}/DEBIAN/
-sed -ie "3s/.*/Version: ${MESA_VER}/g" ${MESA_32}/DEBIAN/control
+sed -ie "3s/.*/Version: ${MESA_VER}-${DATE}/g" ${MESA_32}/DEBIAN/control
 rm mesa-vulkan-drivers_*_armhf.deb
 rm ${MESA_32}/DEBIAN/md5sums ${MESA_32}/DEBIAN/triggers
 rm -rf ${MESA_32}/usr/share/drirc.d
