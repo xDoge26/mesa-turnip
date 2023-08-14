@@ -71,6 +71,7 @@ meson install -C build32/ --destdir ${MESA_32}
 # Build deb64
 cd ${BUILD_PREFIX}
 
+apt remove -y mesa-vulkan-drivers:arm64
 apt download mesa-vulkan-drivers:arm64
 dpkg-deb -e mesa-vulkan-drivers_*_arm64.deb ${MESA_64}/DEBIAN/
 sed -ie "3s/.*/Version: ${MESA_VER}-${DATE}/g" ${MESA_64}/DEBIAN/control
@@ -82,6 +83,7 @@ dpkg-deb --build --root-owner-group ${MESA_64}
 # Build deb32
 cd ${BUILD_PREFIX}
 
+apt remove -y mesa-vulkan-drivers:armhf
 apt download mesa-vulkan-drivers:armhf
 dpkg-deb -e mesa-vulkan-drivers_*_armhf.deb ${MESA_32}/DEBIAN/
 sed -ie "3s/.*/Version: ${MESA_VER}-${DATE}/g" ${MESA_32}/DEBIAN/control
